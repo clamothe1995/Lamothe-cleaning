@@ -4,107 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Lamothe Cleaning Co. – Professional residential and commercial cleaning services in Ottawa, ON. Making cleanliness achievable for everyone." />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/manifest.json" />
+  <link rel="stylesheet" href="css/index.css" />
   <title>Lamothe Cleaning Co. – Making cleanliness achievable for everyone</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a3a5c; }
-
-    /* NAV */
-    nav { background: #1a3a5c; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo span { font-size: 20px; font-weight: 700; color: white; font-family: 'Palatino Linotype', Palatino, Georgia, serif; letter-spacing: 0.01em; }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { color: #a8d8f0; font-size: 15px; text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: white; }
-    .nav-toggle { display: none; }
-    .hamburger { display: none; width: 28px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; }
-    .hamburger span { display: block; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
-
-    /* HERO */
-    .hero { background: #1a3a5c; text-align: center; padding: 80px 24px 90px; }
-    .hero-drops { margin-bottom: 24px; }
-    .hero h1 { font-size: 52px; font-weight: 700; color: white; margin-bottom: 6px; font-family: 'Palatino Linotype', Palatino, Georgia, serif; letter-spacing: 0.01em; }
-    .hero .subname { font-size: 18px; color: #a8d8f0; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 16px; }
-    .hero p { font-size: 22px; color: #5bc8f5; margin-bottom: 36px; }
-    .btn { background: #5bc8f5; color: #1a3a5c; font-size: 16px; font-weight: 700; padding: 14px 32px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
-    .btn:hover { background: #82d6f8; }
-
-    /* SECTIONS */
-    section { padding: 64px 40px; }
-    .section-light { background: #f4f9fd; }
-    .section-mid { background: #e8f4fc; }
-    section h2 { font-size: 32px; font-weight: 700; color: #1a3a5c; text-align: center; margin-bottom: 10px; font-family: Georgia, serif; }
-    .section-sub { text-align: center; color: #4a7fa0; font-size: 16px; margin-bottom: 48px; }
-
-    /* SERVICES CARDS */
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
-    .card { background: white; border-radius: 14px; border: 1px solid #c8e4f5; padding: 28px 22px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(26,58,92,0.1); }
-    .card-icon { font-size: 36px; margin-bottom: 14px; }
-    .card h3 { font-size: 17px; font-weight: 700; color: #1a3a5c; margin-bottom: 10px; }
-    .card p { font-size: 14px; color: #5a7d94; line-height: 1.6; }
-
-    /* WHY US */
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 860px; margin: 0 auto; }
-    .why-item { display: flex; align-items: flex-start; gap: 12px; }
-    .check { width: 24px; height: 24px; border-radius: 50%; background: #5bc8f5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-    .check svg { width: 13px; height: 13px; }
-    .why-item p { font-size: 15px; color: #2c5f7a; line-height: 1.5; font-weight: 500; }
-
-    /* CONTACT */
-    .contact { background: #1a3a5c; padding: 64px 40px; text-align: center; }
-    .contact h2 { color: white; margin-bottom: 10px; }
-    .contact > p { color: #a8d8f0; font-size: 16px; margin-bottom: 40px; }
-    .contact-cards { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-    .contact-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(91,200,245,0.3); border-radius: 14px; padding: 22px 32px; min-width: 210px; }
-    .contact-card .label { font-size: 12px; color: #5bc8f5; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .contact-card .value { font-size: 16px; color: white; font-weight: 500; }
-    .contact-card a { color: white; text-decoration: none; }
-    .contact-card a:hover { text-decoration: underline; }
-
-    /* PROMO BANNER */
-    .promo-banner { background: linear-gradient(135deg, #d6006e 0%, #ff4da6 50%, #d6006e 100%); padding: 18px 40px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .promo-badge { background: white; color: #d6006e; font-size: 28px; font-weight: 900; padding: 6px 18px; border-radius: 8px; line-height: 1.2; letter-spacing: -0.5px; }
-    .promo-text { color: white; font-size: 16px; font-weight: 600; }
-    .promo-text strong { font-size: 18px; }
-
-    /* PRICING */
-    .pricing-strip { background: #f4f9fd; border-top: 1px solid #c8e4f5; border-bottom: 1px solid #c8e4f5; padding: 32px 40px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; text-align: center; }
-    .pricing-item .price-label { font-size: 13px; color: #4a7fa0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
-    .pricing-item .price-value { font-size: 38px; font-weight: 900; color: #1a3a5c; line-height: 1; }
-    .pricing-item .price-value span { font-size: 16px; font-weight: 500; color: #4a7fa0; }
-    .pricing-item .price-note { font-size: 13px; color: #5a7d94; margin-top: 4px; }
-    .pricing-divider { width: 1px; height: 60px; background: #c8e4f5; }
-
-    /* FOOTER */
-    footer { background: #122840; padding: 24px 40px; text-align: center; }
-    footer p { font-size: 13px; color: #4a7fa0; }
-
-    @media (max-width: 600px) {
-      .promo-banner { padding: 14px 20px; }
-      .promo-badge { font-size: 22px; }
-      .pricing-strip { gap: 24px; padding: 24px 20px; }
-      .pricing-divider { width: 60px; height: 1px; }
-      nav { padding: 14px 20px; flex-wrap: wrap; }
-      .hamburger { display: flex; }
-      .nav-links { display: none; flex-direction: column; width: 100%; gap: 0; padding-top: 16px; }
-      .nav-links li a { display: block; padding: 10px 0; }
-      .nav-toggle:checked ~ .nav-links { display: flex; }
-      .hero h1 { font-size: 36px; }
-      section, .contact { padding: 48px 20px; }
-    }
-  </style>
 </head>
 <body>
 
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">
-      <img src="logo_transparent.png" alt="Lamothe Cleaning Co. logo" height="46">
+      <img src="assets/logo_transparent.png" alt="Lamothe Cleaning Co. logo" height="46">
       <span>Lamothe Cleaning Co.</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
@@ -119,7 +30,7 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-drops">
-      <img src="logo_transparent.png" alt="Lamothe Cleaning Co. logo" height="90">
+      <img src="assets/logo_transparent.png" alt="Lamothe Cleaning Co. logo" height="90">
     </div>
     <h1>Lamothe</h1>
     <div class="subname">— Cleaning Co. —</div>
@@ -131,7 +42,7 @@
   <div class="promo-banner">
     <div class="promo-badge">$30 OFF!</div>
     <div class="promo-text"><strong>Limited Time Offer</strong> · 3-hour minimum booking required</div>
-    <a href="mailto:cody@lamothecleaning.ca?subject=Booking%20Request%20–%20%2430%20Off%20Promo&body=Hi%2C%20I%27d%20like%20to%20book%20a%20cleaning%20and%20claim%20the%20%2430%20off%20promotion." class="btn" style="background:white;color:#d6006e;font-size:14px;padding:10px 22px;">Claim Offer</a>
+    <a href="mailto:cody@lamothecleaning.ca?subject=Booking%20Request%20–%20%2430%20Off%20Promo&body=Hi%2C%20I%27d%20like%20to%20book%20a%20cleaning%20and%20claim%20the%20%2430%20off%20promotion." class="btn promo-claim-btn">Claim Offer</a>
   </div>
   -->
   <!-- PRICING -->
@@ -144,13 +55,13 @@
     <div class="pricing-divider"></div>
     <div class="pricing-item">
       <div class="price-label">New client offer</div>
-      <div class="price-value" style="color:#d6006e;">$30 <span style="font-size:20px;font-weight:700;">off</span></div>
+      <div class="price-value offer-price-value">$30 <span>off</span></div>
       <div class="price-note">3-hour minimum booking</div>
     </div>
     <div class="pricing-divider"></div>
     <div class="pricing-item">
       <div class="price-label">Book today</div>
-      <div class="price-value" style="font-size:22px;">613-762-4449</div>
+      <div class="price-value book-phone-value">613-762-4449</div>
       <div class="price-note">Mon – Fri, 8am – 8pm</div>
     </div>
   </div>
@@ -206,6 +117,105 @@
     </div>
   </section>
 
+  <!-- QUOTE TOOL -->
+  <section class="section-light quote-section" id="quote">
+    <h2>Instant Quote Tool</h2>
+    <p class="section-sub">Build your estimate right here and send it with your request.</p>
+
+    <div class="quote-shell">
+      <div class="quote-row">
+        <label for="interval">How often should we clean?</label>
+        <select id="interval" name="interval">
+          <option value="120">Weekly Service ($120 Base)</option>
+          <option value="135" selected>Bi-Weekly Service ($135 Base)</option>
+          <option value="150">Monthly Service ($150 Base)</option>
+        </select>
+      </div>
+
+      <div class="quote-included">
+        <strong>Standard Package Includes:</strong><br>
+        1,500 sq ft, 1 Kitchen, 1 Bath, 1 Shower, 1 Oval Tub, and <b>15m General Dusting</b>.
+      </div>
+
+      <div class="quote-grid">
+        <div class="quote-row">
+          <label for="extraKitchen">Extra Kitchens (+$40)</label>
+          <select id="extraKitchen" name="extraKitchen">
+            <option value="0">None</option>
+            <option value="40">1 Extra</option>
+            <option value="80">2 Extra</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="doubleSinks">Double Sinks (+$10 per set)</label>
+          <select id="doubleSinks" name="doubleSinks">
+            <option value="0">None</option>
+            <option value="10">1 set</option>
+            <option value="20">2 sets</option>
+            <option value="30">3 sets</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="extraShowers">Extra Showers (+$15)</label>
+          <select id="extraShowers" name="extraShowers">
+            <option value="0">None</option>
+            <option value="15">1 Extra</option>
+            <option value="30">2 Extra</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="extraTubs">Extra Tubs (+$20)</label>
+          <select id="extraTubs" name="extraTubs">
+            <option value="0">None</option>
+            <option value="20">1 Extra</option>
+            <option value="40">2 Extra</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="fullBaths">Extra Full Bathrooms (+$25)</label>
+          <select id="fullBaths" name="fullBaths">
+            <option value="0">None</option>
+            <option value="25">1 Extra</option>
+            <option value="50">2 Extra</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="halfBaths">Half Bathrooms (+$15)</label>
+          <select id="halfBaths" name="halfBaths">
+            <option value="0">None</option>
+            <option value="15">1</option>
+            <option value="30">2</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="dusting">Extra Dusting Time</label>
+          <select id="dusting" name="dusting">
+            <option value="0">15m Included (Free)</option>
+            <option value="15">30m Total (+$15)</option>
+            <option value="30">45m Total (+$30)</option>
+            <option value="45">60m Total (+$45)</option>
+          </select>
+        </div>
+        <div class="quote-row">
+          <label for="basement">Basement (+$45)</label>
+          <select id="basement" name="basement">
+            <option value="0">No</option>
+            <option value="45">Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="quote-total-box">
+        <span class="quote-total-label">Estimated Quote:</span>
+        <span class="quote-total-value" id="totalPrice">$135.00</span>
+      </div>
+
+      <div class="quote-next-step">
+        <a class="btn" href="#contact">Continue to Contact Form</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <div class="contact" id="contact">
     <h2>Get in Touch</h2>
@@ -224,12 +234,59 @@
         <div class="value">Mon – Fri, 8am – 8pm</div>
       </div>
     </div>
+
+    <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
+      <h3>Send Us Your Cleaning Request</h3>
+      <p class="form-intro">Your quote details from the section above are auto-filled below.</p>
+
+      <div class="contact-form-grid">
+        <div class="field-group">
+          <label for="customerName">Full Name</label>
+          <input id="customerName" name="customerName" type="text" required />
+        </div>
+        <div class="field-group">
+          <label for="customerEmail">Email</label>
+          <input id="customerEmail" name="customerEmail" type="email" required />
+        </div>
+        <div class="field-group">
+          <label for="customerPhone">Phone</label>
+          <input id="customerPhone" name="customerPhone" type="tel" required />
+        </div>
+        <div class="field-group">
+          <label for="serviceAddress">Service Address</label>
+          <input id="serviceAddress" name="serviceAddress" type="text" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="quoteSummary">Quote Summary</label>
+        <textarea id="quoteSummary" name="quoteSummary" rows="7" readonly></textarea>
+      </div>
+
+      <div class="field-group">
+        <label for="customerMessage">Message</label>
+        <textarea id="customerMessage" name="customerMessage" rows="4" placeholder="Add anything you want us to know before we contact you."></textarea>
+      </div>
+
+      <input id="quoteTotal" name="quoteTotal" type="hidden" />
+      <input id="quoteDataJson" name="quoteDataJson" type="hidden" />
+      <div class="hp-field" aria-hidden="true">
+        <label for="companyWebsite">Website</label>
+        <input id="companyWebsite" name="companyWebsite" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <button class="btn" type="submit">Send Request</button>
+      <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">We will get back to you within 24 hours.</p>
+    </form>
   </div>
 
   <!-- FOOTER -->
   <footer>
     <p>© 2026 Lamothe Cleaning Co. · Ottawa, ON · making cleanliness achievable for everyone</p>
   </footer>
+
+  <script src="js/index.js"></script>
 
 </body>
 </html>

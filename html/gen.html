@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Quote Generator</title>
+    <link rel="stylesheet" href="../css/gen.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Cleaning Quote Tool</h2>
+
+    <div class="section">
+        <label>How often should we clean?</label>
+        <select id="interval">
+            <option value="120">Weekly Service ($120 Base)</option>
+            <option value="135" selected>Bi-Weekly Service ($135 Base)</option>
+            <option value="150">Monthly Service ($150 Base)</option>
+        </select>
+    </div>
+
+    <div class="included">
+        <strong>Standard Package Includes:</strong><br>
+        1,500 sq ft, 1 Kitchen, 1 Bath, 1 Shower, 1 Oval Tub, and <b>15m General Dusting</b>.
+    </div>
+
+    <div class="section">
+        <label>Extra Kitchens (+$40)</label>
+        <select id="extraKitchen">
+            <option value="0">None</option>
+            <option value="40">1 Extra</option>
+            <option value="80">2 Extra</option>
+        </select>
+
+        <label>Double Sinks (+$10 per set)</label>
+        <select id="doubleSinks">
+            <option value="0">None</option>
+            <option value="10">1 set</option>
+            <option value="20">2 sets</option>
+            <option value="30">3 sets</option>
+        </select>
+
+        <label>Extra Showers (+$15)</label>
+        <select id="extraShowers">
+            <option value="0">None</option>
+            <option value="15">1 Extra</option>
+            <option value="30">2 Extra</option>
+        </select>
+
+        <label>Extra Tubs (+$20)</label>
+        <select id="extraTubs">
+            <option value="0">None</option>
+            <option value="20">1 Extra</option>
+            <option value="40">2 Extra</option>
+        </select>
+
+        <label>Extra Full Bathrooms (+$25)</label>
+        <select id="fullBaths">
+            <option value="0">None</option>
+            <option value="25">1 Extra</option>
+            <option value="50">2 Extra</option>
+        </select>
+
+        <label>Half Bathrooms (+$15)</label>
+        <select id="halfBaths">
+            <option value="0">None</option>
+            <option value="15">1</option>
+            <option value="30">2</option>
+        </select>
+        
+        <label>Extra Dusting Time</label>
+        <select id="dusting">
+            <option value="0">15m Included (Free)</option>
+            <option value="15">30m Total (+$15)</option>
+            <option value="30">45m Total (+$30)</option>
+            <option value="45">60m Total (+$45)</option>
+        </select>
+
+        <label>Basement (+$45)</label>
+        <select id="basement">
+            <option value="0">No</option>
+            <option value="45">Yes</option>
+        </select>
+    </div>
+
+    <div class="price-box">
+        <span class="price-label">Estimated Quote:</span>
+        <span class="price-display" id="totalPrice">$135.00</span>
+    </div>
+
+    <div class="quote-next-step">
+        <a class="quote-next-btn" href="../index.html#contact">Continue to Contact Form</a>
+        <p>Your quote is saved automatically and will be added to the contact form.</p>
+    </div>
+</div>
+
+<script src="../js/gen.js"></script>
+
+</body>
+</html>
+

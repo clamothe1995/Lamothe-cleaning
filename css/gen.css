@@ -1,0 +1,15 @@
+:root { --primary: #2c3e50; --accent: #27ae60; --bg: #f4f7f6; }
+body { font-family: sans-serif; background-color: var(--bg); padding: 20px; }
+.container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+h2 { text-align: center; color: var(--primary); }
+.section { margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; }
+label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; color: #555; }
+select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+.price-box { background: #e8f5e9; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px; }
+.price-label { color: #666; font-weight: bold; }
+.price-display { font-size: 2.5rem; font-weight: bold; color: var(--accent); display: block; }
+.included { font-size: 0.85rem; color: #666; margin-bottom: 15px; line-height: 1.4; border-left: 3px solid var(--accent); padding-left: 10px; background: #fafafa; padding-top: 5px; padding-bottom: 5px; }
+.quote-next-step { margin-top: 18px; text-align: center; }
+.quote-next-btn { display: inline-block; background: var(--primary); color: white; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; }
+.quote-next-btn:hover { background: #1e2f3f; }
+.quote-next-step p { margin-top: 8px; color: #566573; font-size: 0.9rem; }
