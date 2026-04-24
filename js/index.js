@@ -2,49 +2,16 @@ function formatCurrency(amount) {
   return '$' + Number(amount).toFixed(2);
 }
 
-function getQuoteConfig() {
-  return [
-    { id: 'interval', label: 'Cleaning interval' },
-    { id: 'extraKitchen', label: 'Extra kitchens' },
-    { id: 'doubleSinks', label: 'Double sinks' },
-    { id: 'extraShowers', label: 'Extra showers' },
-    { id: 'extraTubs', label: 'Extra tubs' },
-    { id: 'fullBaths', label: 'Extra full bathrooms' },
-    { id: 'halfBaths', label: 'Half bathrooms' },
-    { id: 'dusting', label: 'Extra dusting time' },
-    { id: 'basement', label: 'Basement' }
-  ];
-}
-
-function readQuoteFromPage() {
-  var config = getQuoteConfig();
-  var items = [];
-  var total = 0;
-
-  for (var i = 0; i < config.length; i += 1) {
-    var itemConfig = config[i];
-    var select = document.getElementById(itemConfig.id);
-
-    if (!select) {
-      return null;
-    }
-
-    var selectedOption = select.options[select.selectedIndex];
-    var price = parseFloat(select.value);
-
-    items.push({
-      label: itemConfig.label,
-      price: price,
-      valueText: selectedOption ? selectedOption.text : ''
-    });
-
-    total += price;
+function parseStoredQuote(rawQuote) {
+  if (!rawQuote) {
+    return null;
   }
 
-  return {
-    total: total,
-    items: items
-  };
+  try {
+    return JSON.parse(rawQuote);
+  } catch (error) {
+    return null;
+  }
 }
 
 function buildQuoteSummary(quote) {
@@ -74,23 +41,40 @@ function setContactQuoteFields(quote) {
   dataField.value = quote ? JSON.stringify(quote) : '';
 }
 
-function renderQuoteTotal(total) {
-  var totalDisplay = document.getElementById('totalPrice');
-  if (!totalDisplay) {
-    return;
-  }
-
-  totalDisplay.textContent = formatCurrency(total);
-}
-
 function saveAndRenderQuote(quote) {
   if (!quote) {
     return;
   }
 
-  renderQuoteTotal(quote.total);
   setContactQuoteFields(quote);
   localStorage.setItem('lamotheQuote', JSON.stringify(quote));
+}
+
+function loadSavedQuote() {
+  return parseStoredQuote(localStorage.getItem('lamotheQuote'));
+}
+
+function syncQuoteFromMessage(event) {
+  if (!event || !event.data) {
+    return;
+  }
+
+  if (event.origin && event.origin !== window.location.origin) {
+    return;
+  }
+
+  if (event.data.type === 'lamothe-quote-updated') {
+    saveAndRenderQuote(event.data.quote);
+  }
+
+  if (event.data.type === 'lamothe-quote-height') {
+    var quoteFrame = document.getElementById('quoteFrame');
+    if (!quoteFrame || !event.data.height) {
+      return;
+    }
+
+    quoteFrame.style.height = String(event.data.height) + 'px';
+  }
 }
 
 function setFormStatus(message, type) {
@@ -160,9 +144,6 @@ function bindContactFormSubmit() {
 
       setFormStatus('Thanks. Your request was sent successfully.', 'success');
       form.reset();
-
-      var quote = readQuoteFromPage();
-      saveAndRenderQuote(quote);
     } catch (error) {
       setFormStatus(error.message || 'Could not send request right now.', 'error');
     } finally {
@@ -174,31 +155,33 @@ function bindContactFormSubmit() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var quoteSelects = document.querySelectorAll(
-    '#interval, #extraKitchen, #doubleSinks, #extraShowers, #extraTubs, #fullBaths, #halfBaths, #dusting, #basement'
-  );
+  window.addEventListener('message', syncQuoteFromMessage);
 
-  if (quoteSelects.length) {
-    quoteSelects.forEach(function (select) {
-      select.addEventListener('change', function () {
-        saveAndRenderQuote(readQuoteFromPage());
-      });
-    });
-
-    saveAndRenderQuote(readQuoteFromPage());
-  } else {
-    var stored = localStorage.getItem('lamotheQuote');
-    if (!stored) {
-      setContactQuoteFields(null);
-    } else {
-      try {
-        var savedQuote = JSON.parse(stored);
-        setContactQuoteFields(savedQuote);
-        renderQuoteTotal(savedQuote.total || 0);
-      } catch (error) {
-        setContactQuoteFields(null);
-      }
+  window.addEventListener('storage', function (event) {
+    if (event.key !== 'lamotheQuote') {
+      return;
     }
+
+    var quote = parseStoredQuote(event.newValue);
+    if (quote) {
+      saveAndRenderQuote(quote);
+    }
+  });
+
+  var quoteFrame = document.getElementById('quoteFrame');
+  if (quoteFrame) {
+    quoteFrame.addEventListener('load', function () {
+      if (quoteFrame.contentWindow) {
+        quoteFrame.contentWindow.postMessage({ type: 'lamothe-quote-request' }, window.location.origin);
+      }
+    });
+  }
+
+  var savedQuote = loadSavedQuote();
+  if (savedQuote) {
+    saveAndRenderQuote(savedQuote);
+  } else {
+    setContactQuoteFields(null);
   }
 
   bindContactFormSubmit();

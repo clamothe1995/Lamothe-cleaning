@@ -1,48 +1,119 @@
+function getSelectItems() {
+  return [
+    { id: 'interval', label: 'Cleaning interval' },
+    { id: 'packageTier', label: 'Package tier' },
+    { id: 'homeSize', label: 'Home size' },
+    { id: 'homeCondition', label: 'Current condition' },
+    { id: 'pets', label: 'Pets in home' },
+    { id: 'urgency', label: 'Turnaround' },
+    { id: 'extraKitchen', label: 'Extra kitchens' },
+    { id: 'doubleSinks', label: 'Double sinks' },
+    { id: 'extraShowers', label: 'Extra showers' },
+    { id: 'extraTubs', label: 'Extra tubs' },
+    { id: 'fullBaths', label: 'Extra full bathrooms' },
+    { id: 'halfBaths', label: 'Half bathrooms' },
+    { id: 'dusting', label: 'Extra dusting time' },
+    { id: 'basement', label: 'Basement' }
+  ];
+}
+
+function isEmbedded() {
+  return window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1';
+}
+
+function notifyParent(message) {
+  if (!isEmbedded()) {
+    return;
+  }
+
+  window.parent.postMessage(message, window.location.origin);
+}
+
+function getCurrentQuote() {
+  var stored = localStorage.getItem('lamotheQuote');
+  if (!stored) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(stored);
+  } catch (error) {
+    return null;
+  }
+}
+
 function calculate() {
-  var base = parseFloat(document.getElementById('interval').value);
-  var kitchen = parseFloat(document.getElementById('extraKitchen').value);
-  var sinks = parseFloat(document.getElementById('doubleSinks').value);
-  var showers = parseFloat(document.getElementById('extraShowers').value);
-  var tubs = parseFloat(document.getElementById('extraTubs').value);
-  var fullBaths = parseFloat(document.getElementById('fullBaths').value);
-  var halfBaths = parseFloat(document.getElementById('halfBaths').value);
-  var dusting = parseFloat(document.getElementById('dusting').value);
-  var basement = parseFloat(document.getElementById('basement').value);
+  var total = 0;
 
-  var grandTotal = base + kitchen + sinks + showers + tubs + fullBaths + halfBaths + dusting + basement;
+  var items = getSelectItems().map(function (item) {
+    var select = document.getElementById(item.id);
+    var price = parseFloat(select.value);
+    var optionText = select.options[select.selectedIndex].text;
 
-  document.getElementById('totalPrice').textContent = '$' + grandTotal.toFixed(2);
+    total += price;
 
-  var quoteData = {
-    total: grandTotal,
-    items: [
-      { id: 'interval', label: 'Cleaning interval', price: base },
-      { id: 'extraKitchen', label: 'Extra kitchens', price: kitchen },
-      { id: 'doubleSinks', label: 'Double sinks', price: sinks },
-      { id: 'extraShowers', label: 'Extra showers', price: showers },
-      { id: 'extraTubs', label: 'Extra tubs', price: tubs },
-      { id: 'fullBaths', label: 'Extra full bathrooms', price: fullBaths },
-      { id: 'halfBaths', label: 'Half bathrooms', price: halfBaths },
-      { id: 'dusting', label: 'Extra dusting time', price: dusting },
-      { id: 'basement', label: 'Basement', price: basement }
-    ].map(function (item) {
-      var select = document.getElementById(item.id);
-      var optionText = select.options[select.selectedIndex].text;
-      return {
-        label: item.label,
-        price: item.price,
-        valueText: optionText
-      };
-    })
+    return {
+      label: item.label,
+      price: price,
+      valueText: optionText
+    };
+  });
+
+  var addOnBoxes = document.querySelectorAll('.addon');
+  addOnBoxes.forEach(function (box) {
+    var price = box.checked ? parseFloat(box.dataset.price || '0') : 0;
+
+    items.push({
+      label: box.dataset.label || 'Add-on',
+      price: price,
+      valueText: box.checked ? 'Selected' : 'Not selected'
+    });
+
+    total += price;
+  });
+
+  document.getElementById('totalPrice').textContent = '$' + total.toFixed(2);
+
+  var quote = {
+    total: total,
+    items: items
   };
 
-  localStorage.setItem('lamotheQuote', JSON.stringify(quoteData));
+  localStorage.setItem('lamotheQuote', JSON.stringify(quote));
+  notifyParent({ type: 'lamothe-quote-updated', quote: quote });
+  notifyParent({ type: 'lamothe-quote-height', height: document.body.scrollHeight });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  if (isEmbedded()) {
+    document.body.classList.add('embedded-body');
+  }
+
   var selects = document.querySelectorAll('select');
   selects.forEach(function (select) {
     select.addEventListener('change', calculate);
+  });
+
+  var addOnBoxes = document.querySelectorAll('.addon');
+  addOnBoxes.forEach(function (box) {
+    box.addEventListener('change', calculate);
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.origin && event.origin !== window.location.origin) {
+      return;
+    }
+
+    if (!event.data || event.data.type !== 'lamothe-quote-request') {
+      return;
+    }
+
+    var quote = getCurrentQuote();
+    if (quote) {
+      notifyParent({ type: 'lamothe-quote-updated', quote: quote });
+    }
+
+    notifyParent({ type: 'lamothe-quote-height', height: document.body.scrollHeight });
   });
 
   calculate();

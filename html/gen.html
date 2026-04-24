@@ -14,18 +14,61 @@
     <div class="section">
         <label>How often should we clean?</label>
         <select id="interval">
+            <option value="165">Single Visit Service ($165 Base)</option>
             <option value="120">Weekly Service ($120 Base)</option>
             <option value="135" selected>Bi-Weekly Service ($135 Base)</option>
             <option value="150">Monthly Service ($150 Base)</option>
+        </select>
+
+        <label>Package Tier</label>
+        <select id="packageTier">
+            <option value="0" selected>Standard Clean (Included)</option>
+            <option value="45">Deep Clean (+$45)</option>
+            <option value="80">Move-In / Move-Out (+$80)</option>
+            <option value="95">Post-Construction (+$95)</option>
         </select>
     </div>
 
     <div class="included">
         <strong>Standard Package Includes:</strong><br>
-        1,500 sq ft, 1 Kitchen, 1 Bath, 1 Shower, 1 Oval Tub, and <b>15m General Dusting</b>.
+        1,500 sq ft, 1 Kitchen, 1 Bath, 1 Shower, 1 Oval Tub, and <b>15m General Dusting</b>.<br>
+        Upgrade to Deep Clean, Move-In/Move-Out, or Post-Construction for detail-focused service.
     </div>
 
     <div class="section">
+        <h3 class="section-title">Smarter Pricing Inputs</h3>
+
+        <label>Home Size</label>
+        <select id="homeSize">
+            <option value="0" selected>Up to 1,500 sq ft (Included)</option>
+            <option value="20">1,501 - 2,000 sq ft (+$20)</option>
+            <option value="45">2,001 - 2,500 sq ft (+$45)</option>
+            <option value="75">2,501+ sq ft (+$75)</option>
+        </select>
+
+        <label>Current Condition</label>
+        <select id="homeCondition">
+            <option value="0" selected>Light upkeep (No extra)</option>
+            <option value="25">Moderate buildup (+$25)</option>
+            <option value="50">Heavy buildup (+$50)</option>
+        </select>
+
+        <label>Pets in Home</label>
+        <select id="pets">
+            <option value="0" selected>No</option>
+            <option value="20">Yes (+$20)</option>
+        </select>
+
+        <label>Turnaround</label>
+        <select id="urgency">
+            <option value="0" selected>Flexible scheduling</option>
+            <option value="35">Rush (within 48 hours) (+$35)</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">Layout And Fixture Adjustments</h3>
+
         <label>Extra Kitchens (+$40)</label>
         <select id="extraKitchen">
             <option value="0">None</option>
@@ -82,6 +125,36 @@
             <option value="0">No</option>
             <option value="45">Yes</option>
         </select>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">Add-On Menu</h3>
+        <div class="addon-list">
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Inside Oven" data-price="25">
+                <span>Inside Oven <strong>(+$25)</strong></span>
+            </label>
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Inside Fridge" data-price="20">
+                <span>Inside Fridge <strong>(+$20)</strong></span>
+            </label>
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Inside Cabinets" data-price="35">
+                <span>Inside Cabinets <strong>(+$35)</strong></span>
+            </label>
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Interior Windows" data-price="40">
+                <span>Interior Windows <strong>(+$40)</strong></span>
+            </label>
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Laundry And Fold" data-price="25">
+                <span>Laundry And Fold <strong>(+$25)</strong></span>
+            </label>
+            <label class="addon-item">
+                <input type="checkbox" class="addon" data-label="Pet Hair Treatment" data-price="30">
+                <span>Pet Hair Treatment <strong>(+$30)</strong></span>
+            </label>
+        </div>
     </div>
 
     <div class="price-box">

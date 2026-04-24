@@ -123,93 +123,14 @@
     <p class="section-sub">Build your estimate right here and send it with your request.</p>
 
     <div class="quote-shell">
-      <div class="quote-row">
-        <label for="interval">How often should we clean?</label>
-        <select id="interval" name="interval">
-          <option value="120">Weekly Service ($120 Base)</option>
-          <option value="135" selected>Bi-Weekly Service ($135 Base)</option>
-          <option value="150">Monthly Service ($150 Base)</option>
-        </select>
-      </div>
-
-      <div class="quote-included">
-        <strong>Standard Package Includes:</strong><br>
-        1,500 sq ft, 1 Kitchen, 1 Bath, 1 Shower, 1 Oval Tub, and <b>15m General Dusting</b>.
-      </div>
-
-      <div class="quote-grid">
-        <div class="quote-row">
-          <label for="extraKitchen">Extra Kitchens (+$40)</label>
-          <select id="extraKitchen" name="extraKitchen">
-            <option value="0">None</option>
-            <option value="40">1 Extra</option>
-            <option value="80">2 Extra</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="doubleSinks">Double Sinks (+$10 per set)</label>
-          <select id="doubleSinks" name="doubleSinks">
-            <option value="0">None</option>
-            <option value="10">1 set</option>
-            <option value="20">2 sets</option>
-            <option value="30">3 sets</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="extraShowers">Extra Showers (+$15)</label>
-          <select id="extraShowers" name="extraShowers">
-            <option value="0">None</option>
-            <option value="15">1 Extra</option>
-            <option value="30">2 Extra</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="extraTubs">Extra Tubs (+$20)</label>
-          <select id="extraTubs" name="extraTubs">
-            <option value="0">None</option>
-            <option value="20">1 Extra</option>
-            <option value="40">2 Extra</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="fullBaths">Extra Full Bathrooms (+$25)</label>
-          <select id="fullBaths" name="fullBaths">
-            <option value="0">None</option>
-            <option value="25">1 Extra</option>
-            <option value="50">2 Extra</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="halfBaths">Half Bathrooms (+$15)</label>
-          <select id="halfBaths" name="halfBaths">
-            <option value="0">None</option>
-            <option value="15">1</option>
-            <option value="30">2</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="dusting">Extra Dusting Time</label>
-          <select id="dusting" name="dusting">
-            <option value="0">15m Included (Free)</option>
-            <option value="15">30m Total (+$15)</option>
-            <option value="30">45m Total (+$30)</option>
-            <option value="45">60m Total (+$45)</option>
-          </select>
-        </div>
-        <div class="quote-row">
-          <label for="basement">Basement (+$45)</label>
-          <select id="basement" name="basement">
-            <option value="0">No</option>
-            <option value="45">Yes</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="quote-total-box">
-        <span class="quote-total-label">Estimated Quote:</span>
-        <span class="quote-total-value" id="totalPrice">$135.00</span>
-      </div>
-
+      <iframe
+        id="quoteFrame"
+        class="quote-frame"
+        src="html/gen.html?embed=1"
+        title="Instant Quote Tool"
+        loading="lazy"
+      ></iframe>
+      <p class="quote-embed-note">Quote updates are synced automatically into the contact form below.</p>
       <div class="quote-next-step">
         <a class="btn" href="#contact">Continue to Contact Form</a>
       </div>
